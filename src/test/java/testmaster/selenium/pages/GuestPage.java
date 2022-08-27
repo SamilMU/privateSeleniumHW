@@ -26,7 +26,13 @@ public class GuestPage extends BasePage {
     }
 
     public void clickLoginButton(){
-
+    
+        By termsAndCookiesButton = By.xpath("//button[@class='onetrust-close-btn-handler onetrust-close-btn-ui banner-close-button ot-close-icon']");
+    
+        assertTrue(methods.isElementClickable(termsAndCookiesButton,10));
+    
+        methods.clickElement(termsAndCookiesButton);
+    
         By loginButton = By.xpath("//button[@data-testid='login-button']");
 
         assertTrue(methods.isElementClickable(loginButton,10));

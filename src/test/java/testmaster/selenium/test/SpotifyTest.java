@@ -33,7 +33,7 @@ public class SpotifyTest extends Driver {
         guestPage.clickLoginButton();
         loginPage.validLogin("samil.unal@testinium.com","@webbcry37228");
         //homePage.loginControl("Samil");
-
+        
         homePage.clickCreatePlaylistButton();
 
         playlistPage.changePlaylistName();
@@ -47,6 +47,10 @@ public class SpotifyTest extends Driver {
         homePage.clickCustomPlaylist();
 
         playlistPage.play2ndSongFor10Sec();
+        
+        playlistPage.remove3rdSongFromPlaylist();
+        
+        playlistPage.removePlaylist();
 
     }
 

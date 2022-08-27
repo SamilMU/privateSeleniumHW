@@ -36,5 +36,15 @@ public class HomePage extends BasePage {
         methods.clickElement(customPlaylistButton);
 
     }
+    
+    public void deleteCustomPlaylist(){
+    
+        By customPlaylistButton = By.xpath("//div[@class='AINMAUImkAYJd4ertQxy']");
+    
+        assertTrue(methods.isElementClickable(customPlaylistButton,10));
+    
+        methods.clickElement(customPlaylistButton);
+        
+    }
 
 }
