@@ -11,8 +11,7 @@ public class SpotifyTest extends Driver {
     HomePage homePage;
     PlaylistPage playlistPage;
     SearchPage searchPage;
-
-    @Test
+    
     public void loginTest(){
 
         /**
@@ -28,13 +27,14 @@ public class SpotifyTest extends Driver {
 
     }
 
+    @Test
     public void seleniumTestAutomationHWTest(){
         init();
         guestPage.clickLoginButton();
         loginPage.validLogin("samil.unal@testinium.com","@webbcry37228");
-        homePage.loginControl("Samil");
+        //homePage.loginControl("Samil");
 
-        homePage.clickCustomPlaylist();
+        homePage.clickCreatePlaylistButton();
 
         playlistPage.changePlaylistName();
 
@@ -44,7 +44,7 @@ public class SpotifyTest extends Driver {
 
         searchPage.addSongs2Playlist();
 
-        searchPage.clickCreatePlaylistButton();
+        homePage.clickCustomPlaylist();
 
         playlistPage.play2ndSongFor10Sec();
 

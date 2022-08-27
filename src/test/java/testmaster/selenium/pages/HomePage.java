@@ -29,7 +29,7 @@ public class HomePage extends BasePage {
 
     public void clickCustomPlaylist(){
 
-        By customPlaylistButton = By.xpath("//div[@class='os-content']//span[text()='Spotify Listem']");
+        By customPlaylistButton = By.xpath("//div[@class='AINMAUImkAYJd4ertQxy']");
 
         assertTrue(methods.isElementClickable(customPlaylistButton,10));
 

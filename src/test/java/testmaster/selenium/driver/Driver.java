@@ -26,7 +26,7 @@ public class Driver {
     public void beforeEach(){
 
         logger.info("========= Before =========");
-        System.setProperty("webdriver.chrome.driver","src/test/resources/chromedriver");
+        System.setProperty("webdriver.chrome.driver","src/test/resources/chromedriver.exe");
 
         /**
         // Windows

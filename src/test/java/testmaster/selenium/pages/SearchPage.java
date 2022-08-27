@@ -30,11 +30,10 @@ public class SearchPage extends BasePage {
 
         methods.clickElement(songsChip);
 
-        for(int i=0;i<3;i++){
-
+        for(int i=2;i<5;i++){  // Song list index starts at 2.
+            
             String selectedSongStr = "//div[@class='JUa6JJNj7R_Y3i4P8YUX' and @role='presentation']//div[@aria-rowindex=" + i + "]";
-
-            i += 2; // Song list index starts at 2.
+            
             By selectedSong = By.xpath(selectedSongStr);
 
             methods.hoverElement(selectedSong);
@@ -56,6 +55,8 @@ public class SearchPage extends BasePage {
             assertTrue(methods.isElementClickable(myPlaylistMenuItem,10));
 
             methods.clickElement(myPlaylistMenuItem);
+            
+            methods.waitBySeconds(2);
 
         }
     }

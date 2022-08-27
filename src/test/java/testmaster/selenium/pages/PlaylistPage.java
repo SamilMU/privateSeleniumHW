@@ -41,6 +41,8 @@ public class PlaylistPage extends BasePage {
         By secondSongMenuItem = By.xpath("//div[@class='JUa6JJNj7R_Y3i4P8YUX']//div[@aria-rowindex='2']");
 
         methods.hoverElement(secondSongMenuItem);
+        
+        methods.waitBySeconds(15);
 
     }
 }
