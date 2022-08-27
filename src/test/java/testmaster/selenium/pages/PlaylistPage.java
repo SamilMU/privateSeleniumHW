@@ -40,9 +40,19 @@ public class PlaylistPage extends BasePage {
 
         By secondSongMenuItem = By.xpath("//div[@class='JUa6JJNj7R_Y3i4P8YUX']//div[@aria-rowindex='2']");
 
+        methods.scrollElementCenter(secondSongMenuItem);
+
         methods.hoverElement(secondSongMenuItem);
-        
-        methods.waitBySeconds(15);
+
+        By playButton = By.xpath("//button[@class='RfidWIoz8FON2WhFoItU']");
+
+        assertTrue(methods.isElementClickable(playButton,10));
+
+        methods.clickElement(playButton);
+
+        methods.waitBySeconds(10);
+
+
 
     }
 }
