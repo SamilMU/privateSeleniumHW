@@ -21,7 +21,7 @@ public class GuestPage extends BasePage {
     }
 
     public void guestPageLoadedCheck() {
-        logger.info("============== Guest Page Loaded Check ================");
+        logger.warn("============== Guest Page Loaded Check ================");
 
         tabNameAndUrlCheck(tabName, methods.driver.getTitle(), pageUrl, methods.driver.getCurrentUrl());
         sideBarCheck();
@@ -31,7 +31,7 @@ public class GuestPage extends BasePage {
 
     public void clickLoginButton() {
 
-        logger.info("============== Click Login Button ================");
+        logger.warn("============== Click Login Button ================");
         assertTrue(methods.isElementClickable(loginButton, 10));
         methods.clickElement(loginButton);
         methods.waitBySeconds(1);
@@ -40,7 +40,7 @@ public class GuestPage extends BasePage {
 
     public void closeTermsFooterIfOpen() {
 
-        logger.info("============== Close Footer ================");
+        logger.warn("============== Close Footer ================");
         if (methods.isElementVisible(closeTermsPopUpButton, 3)) {
             By termsAndCookiesButton = By.xpath("//button[@class='onetrust-close-btn-handler onetrust-close-btn-ui banner-close-button ot-close-icon']");
             assertTrue(methods.isElementClickable(termsAndCookiesButton, 10));

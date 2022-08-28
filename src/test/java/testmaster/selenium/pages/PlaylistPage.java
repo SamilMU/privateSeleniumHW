@@ -24,7 +24,7 @@ public class PlaylistPage extends BasePage {
 
     public void playlistPageLoadedCheck() {
 
-        logger.info("==============  Playlist Page Loaded Check  ================");
+        logger.warn("==============  Playlist Page Loaded Check  ================");
     
         
         String urlWithoutRedirection = methods.driver.getCurrentUrl().substring(0, 34);
@@ -38,7 +38,7 @@ public class PlaylistPage extends BasePage {
 
     public void changePlaylistName(String newPlaylistName) {
 
-        logger.info("==============  Change Playlist Name  ================");
+        logger.warn("==============  Change Playlist Name  ================");
 
         playlistName = newPlaylistName;
 
@@ -70,7 +70,7 @@ public class PlaylistPage extends BasePage {
         methods.clickElement(playButton);
 
         long songPos = getSongPosition();
-        methods.waitBySeconds(8);
+        methods.waitBySeconds(9);
 
         while (songPos < (duration * 1000)) {
             methods.waitByMilliSeconds(200);

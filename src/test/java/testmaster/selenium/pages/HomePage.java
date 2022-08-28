@@ -9,7 +9,7 @@ public class HomePage extends BasePage {
 
     public void homePageLoadedCheck() {
 
-        logger.info("============== Home Page Loaded Check ================");
+        logger.warn("============== Home Page Loaded Check ================");
         tabNameAndUrlCheck(tabName, methods.driver.getTitle(), pageUrl, methods.driver.getCurrentUrl());
         sideBarCheck();
         loggedInCheck("Samil"); // Might take as a parameter.

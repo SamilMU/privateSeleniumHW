@@ -14,7 +14,7 @@ public class SearchPage extends BasePage {
     private static final By chipOfSongs = By.xpath("//span[@class='ChipInner-sc-1ly6j4j-0 dLSEQM' and text()='Songs']");
 
     public void searchPageLoadedCheck() {
-        logger.info("==============  Search Page Loaded Check  ================");
+        logger.warn("==============  Search Page Loaded Check  ================");
 
         String urlWithoutKeyword = methods.driver.getCurrentUrl().substring(0, 31);
         tabNameAndUrlCheck(tabName, methods.driver.getTitle(), pageUrl, urlWithoutKeyword);
@@ -22,7 +22,7 @@ public class SearchPage extends BasePage {
     }
 
     public void search(String searchStr) {
-        logger.info("==============  Search  ================");
+        logger.warn("==============  Search  ================");
 
         assertTrue(methods.isElementVisible(searchTextBox, 10));
         methods.sendKeys(searchTextBox, searchStr);
@@ -31,7 +31,7 @@ public class SearchPage extends BasePage {
     }
 
     public void addSongs2Playlist(int songCount) {
-        logger.debug("==============  Add Songs to Playlist  ================");
+        logger.warn("==============  Add Songs to Playlist  ================");
 
         assertTrue(methods.isElementClickable(chipOfSongs, 10));
 

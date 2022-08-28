@@ -11,7 +11,7 @@ public class LoginPage extends BasePage {
     private static final String tabName = "Login - Spotify";
 
     public void loginPageLoadedCheck() {
-        logger.info("==============  Login Page Loaded Check ================");
+        logger.warn("==============  Login Page Loaded Check ================");
 
         String urlWithoutRedirection = methods.driver.getCurrentUrl().substring(0, 37);
         tabNameAndUrlCheck(tabName, methods.driver.getTitle(), pageUrl, urlWithoutRedirection);
@@ -26,7 +26,7 @@ public class LoginPage extends BasePage {
 
         loginPageLoadedCheck();
 
-        logger.info("==============  Valid Login  ================");
+        logger.warn("==============  Valid Login  ================");
 
         methods.sendKeys(By.id("login-username"), username);
         methods.sendKeys(By.id("login-password"), password);
