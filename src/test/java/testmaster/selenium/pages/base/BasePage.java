@@ -13,6 +13,7 @@ public class BasePage {
 
     protected Methods methods;
     protected static final Logger logger = LogManager.getLogger(Methods.class);
+    protected static String playlistName;
 
     public BasePage(){
         this.methods = new Methods();
