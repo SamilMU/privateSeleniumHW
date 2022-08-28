@@ -12,7 +12,7 @@ public class HomePage extends BasePage {
     private static String tabName = "Spotify – Web Player";
 
     public void homePageLoadedCheck(){
-
+        
         tabNameAndUrlCheck(tabName, methods.driver.getTitle(), pageUrl, methods.driver.getCurrentUrl());
         sideBarCheck();
         loggedInCheck("Samil"); // Might take as a parameter.
@@ -21,7 +21,6 @@ public class HomePage extends BasePage {
 
     public void clickCustomPlaylist(String playlistName){
 
-        homePageLoadedCheck();
         By customPlaylistButton = By.xpath("//a[contains(@href,'playlist')]//span[text()='" + playlistName + "']");
         assertTrue(methods.isElementClickable(customPlaylistButton,10));
         methods.clickElementJs(customPlaylistButton);

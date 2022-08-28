@@ -26,7 +26,7 @@ public class LoginPage extends BasePage {
         assertTrue(methods.isElementVisible(By.xpath("//button[@data-testid='apple-login']"),20));
 
         // TODO Test this.
-//        visibleElementCheck(By.id("login-username"),By.id("login-password"),By.id("reset-password-link"),By.id("login-button"));
+        visibleElementCheck(By.id("login-username"),By.id("login-password"),By.id("reset-password-link"),By.id("login-button"));
 
     }
 
@@ -36,10 +36,13 @@ public class LoginPage extends BasePage {
         
         methods.sendKeys(By.id("login-username"), username);
         methods.sendKeys(By.id("login-password"), password);
-
+    
+        methods.waitByMilliSeconds(200);
         assertTrue(methods.isElementClickable(By.id("login-button"),10));
 
         methods.clickElement(By.id("login-button"));
+        
+        methods.waitBySeconds(2);
         
     }
 

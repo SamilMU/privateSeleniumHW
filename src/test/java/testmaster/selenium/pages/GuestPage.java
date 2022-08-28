@@ -19,6 +19,7 @@ public class GuestPage extends BasePage {
     public GuestPage(){
         guestPageLoadedCheck();
         closeTermsFooterIfOpen();
+        logger.warn(" Browser language should be English! ");
     }
 
     public void guestPageLoadedCheck(){

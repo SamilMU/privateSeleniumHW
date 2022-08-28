@@ -17,7 +17,6 @@ public class BasePage {
 
     public BasePage(){
         this.methods = new Methods();
-        logger.warn(" Browser language should be English! ");
     }
 
     public void tabNameAndUrlCheck(String expectedTabName, String actualTabName, String expectedURL, String actualURL){
@@ -58,7 +57,7 @@ public class BasePage {
 
 
     public void clickSearchButton(){
-
+        
         By createPlaylistButton = By.xpath("//a[@class='link-subtle ATUzFKub89lzvkmvhpyE' and @href='/search']");
         assertTrue(methods.isElementClickable(createPlaylistButton,10));
         methods.clickElement(createPlaylistButton);

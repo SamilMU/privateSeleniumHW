@@ -36,6 +36,7 @@ public class Methods {
 
     public void clickElement(By by){
         findElementWait(by).click();
+        waitBySeconds(1);
         logger.info(by.toString() + " elementine tıklandı");
     }
 
@@ -67,12 +68,6 @@ public class Methods {
 
     public int countListSize(String xPathOfParent){
         return driver.findElements(By.xpath(xPathOfParent)).size()-1;
-    }
-
-    public void scrollElement(By by){
-        WebElement webElement = findElementWait(by);
-        jsDriver.executeScript("arguments[0].scrollIntoView();", webElement);
-        logger.info(by.toString() + " scrollElement");
     }
 
     public void scrollElementIfNeeded(By by){

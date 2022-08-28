@@ -29,6 +29,8 @@ public class SpotifyTest extends Driver {
 
         loginPage.validLogin("samil.unal@testinium.com","@webbcry37228");
         
+        homePage.homePageLoadedCheck();
+        
         homePage.clickCreatePlaylistButton();
 
         playlistPage.changePlaylistName("Spotify Listem");

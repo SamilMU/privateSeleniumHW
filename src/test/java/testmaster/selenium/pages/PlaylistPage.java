@@ -45,7 +45,7 @@ public class PlaylistPage extends BasePage {
 
         assertTrue(methods.isElementClickable(playListNameBox, 10));
         methods.clickElement(playListNameBox);
-
+        
         assertTrue(methods.isElementVisible(playlistEditTextBox, 10));
         methods.sendKeys(playlistEditTextBox, newPlaylistName);
 
@@ -73,7 +73,7 @@ public class PlaylistPage extends BasePage {
         while(songPos<(duration*1000)){
             methods.waitByMilliSeconds(200);
             songPos = getSongPosition();
-            logger.info("Song pos : " + songPos + " and aimed duration : " + duration);
+            logger.info("Song pos : " + songPos + " and aimed duration : " + (duration*1000));
         }
 
         methods.clickElement(By.xpath("//button[@data-testid='control-button-playpause']"));
@@ -127,7 +127,7 @@ public class PlaylistPage extends BasePage {
 
         assertTrue(methods.isElementVisible(playlistDeletedPopUp, 3));
         logger.info("Playlist silindi.");
-        methods.waitBySeconds(5);
+        methods.waitBySeconds(2);
 
     }
 
