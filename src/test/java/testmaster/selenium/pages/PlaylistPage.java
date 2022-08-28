@@ -16,7 +16,11 @@ public class PlaylistPage extends BasePage {
      */
     private static String pageUrl = "https://open.spotify.com/playlist/";
     private static String tabName = "Spotify - My Playlist";
-
+    private static By moreButton = By.xpath("//div[@data-testid='action-bar-row']//button[@data-testid='more-button']");
+    private static By playListNameBox = By.xpath("//button[@class='wCkmVGEQh3je1hrbsFBY']");
+    private static By playlistEditTextBox = By.xpath("//input[@data-testid='playlist-edit-details-name-input']");
+    private static By playlistEditSaveButton = By.xpath("//button[@data-testid='playlist-edit-details-save-button']");
+    private static By playlistMoreButton = By.xpath("//div[@class='eSg4ntPU2KQLfpLGXAww']//button[@data-testid='more-button']");
     public void playlistPageLoadedCheck() {
 
         String urlWithoutRedirection = methods.driver.getCurrentUrl().substring(0, 34);
@@ -25,36 +29,23 @@ public class PlaylistPage extends BasePage {
         tabNameAndUrlCheck(tabName, defaultTabName, pageUrl, urlWithoutRedirection);
         sideBarCheck();
 
-        assertTrue(methods.isElementVisible
-                (By.xpath("//div[@data-testid='action-bar-row']//button[@data-testid='more-button']"),
-                        20));
+        assertTrue(methods.isElementVisible(moreButton, 20));
 
     }
 
     public void changePlaylistName(String newPlaylistName) {
 
-        By playlistNameButton = By.xpath("//button[@class='wCkmVGEQh3je1hrbsFBY']");
-        assertTrue(methods.isElementClickable(playlistNameButton, 10));
-        methods.clickElement(playlistNameButton);
+        assertTrue(methods.isElementClickable(playListNameBox, 10));
+        methods.clickElement(playListNameBox);
 
+        assertTrue(methods.isElementVisible(playlistEditTextBox, 10));
+        methods.sendKeys(playlistEditTextBox, newPlaylistName);
 
-        By playlistNewNameTextBox = By.xpath("//input[@data-testid='playlist-edit-details-name-input']");
-
-        assertTrue(methods.isElementVisible(playlistNewNameTextBox, 10));
-        methods.sendKeys(playlistNewNameTextBox, newPlaylistName);
-
-
-        By playlistSaveButton = By.xpath("//button[@data-testid='playlist-edit-details-save-button']");
-        assertTrue(methods.isElementClickable(playlistSaveButton, 10));
-        methods.clickElement(playlistSaveButton);
+        assertTrue(methods.isElementClickable(playlistEditSaveButton, 10));
+        methods.clickElement(playlistEditSaveButton);
 
     }
 
-    // TODO
-
-    /**
-     * data-testid:"playback-position" or value of data-testid:"playback-duration"
-     */
     public void playSong(String songName, long duration) {
     
         String wantedMenuItem = "//div[contains(text(),'"+ songName +"')]";
@@ -72,7 +63,7 @@ public class PlaylistPage extends BasePage {
 
         methods.clickElement(playButton);
 
-        Long songPos = getSongPosition();
+        long songPos = getSongPosition();
         methods.waitBySeconds(10);
         
         while(songPos<(duration*1000)){
@@ -120,11 +111,10 @@ public class PlaylistPage extends BasePage {
 
     public void removePlaylist() {
 
-        By selectedSongMoreButton = By.xpath("//div[@class='eSg4ntPU2KQLfpLGXAww']//button[@data-testid='more-button']");
-        methods.scrollElementIfNeeded(selectedSongMoreButton);
-        assertTrue(methods.isElementClickable(selectedSongMoreButton, 10));
+        methods.scrollElementIfNeeded(playlistMoreButton);
+        assertTrue(methods.isElementClickable(playlistMoreButton, 10));
 
-        methods.clickElement(selectedSongMoreButton);
+        methods.clickElement(playlistMoreButton);
         // TODO make sure menu is opened.
         methods.clickElement(By.xpath("//button[@class='wC9sIed7pfp47wZbmU6m']//span[text()='Delete']"));
         // TODO check if PopUp is existent.
@@ -135,7 +125,6 @@ public class PlaylistPage extends BasePage {
         methods.clickElement(deletionConfirmationButton);
 
         assertTrue(methods.isElementVisible(By.cssSelector("div[class=AOaoydTb5lrGytHbTAAy]"), 3));
-
         methods.waitBySeconds(5);
 
     }

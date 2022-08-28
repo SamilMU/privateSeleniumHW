@@ -21,13 +21,8 @@ public class HomePage extends BasePage {
 
     }
 
-
-    //TODO can take a playlist name but there are hidden elemets atop.
     public void clickCustomPlaylist(String playlistName){
 
-        //a[contains(@href,'playlist')]//span[text()='Spotify Listem']
-
-//        By customPlaylistButton = By.xpath("//div[@class='AINMAUImkAYJd4ertQxy']");
         By customPlaylistButton = By.xpath("//a[contains(@href,'playlist')]//span[text()='" + playlistName + "']");
         assertTrue(methods.isElementClickable(customPlaylistButton,10));
         methods.clickElementJs(customPlaylistButton);
