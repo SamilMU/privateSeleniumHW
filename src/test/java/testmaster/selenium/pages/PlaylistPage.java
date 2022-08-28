@@ -24,6 +24,7 @@ public class PlaylistPage extends BasePage {
     private static By dropdownMenuDeleteButton = By.xpath("//button[@class='wC9sIed7pfp47wZbmU6m']//span[text()='Delete']");
     private static By deletionConfirmationButton = By.xpath("//button[@class='Button-qlcn5g-0 hgTVhT']//span[text()='DELETE']");
     private static By playlistDeletedPopUp = By.cssSelector("div[class=AOaoydTb5lrGytHbTAAy]");
+    private static By moreOptionsMenu = By.xpath("//div[@id='context-menu']");
     private static By playButton;
     private static By selectedMenuItem;
     public void playlistPageLoadedCheck() {
@@ -67,11 +68,12 @@ public class PlaylistPage extends BasePage {
         methods.clickElement(playButton);
 
         long songPos = getSongPosition();
-        methods.waitBySeconds(10);
+        methods.waitBySeconds(8);
         
         while(songPos<(duration*1000)){
             methods.waitByMilliSeconds(200);
             songPos = getSongPosition();
+            logger.info("Song pos : " + songPos + " and aimed duration : " + duration);
         }
 
         methods.clickElement(By.xpath("//button[@data-testid='control-button-playpause']"));
@@ -86,14 +88,10 @@ public class PlaylistPage extends BasePage {
 
 
 
-    // TODO get index as parameter.
     public void removeSongFromPlaylist(int index) {
     
-    
-        // TODO use global playlist name const
         String playlistSizeXPath = "//div[@aria-label='" + playlistName + "']//div[@role='row']";
         int playlistSize = methods.countListSize(playlistSizeXPath);
-        logger.info("Playlist current size is " + playlistSize);
 
         String selectedMenuItemStr = "//div[@class='JUa6JJNj7R_Y3i4P8YUX']//div[@aria-rowindex='" + (index+1) + "']";
         selectedMenuItem = By.xpath(selectedMenuItemStr);
@@ -103,16 +101,15 @@ public class PlaylistPage extends BasePage {
         methods.hoverElement(selectedSongMoreButton);
         methods.clickElement(selectedSongMoreButton);
 
-        assertTrue(methods.isElementVisible(By.xpath("//div[@id='context-menu']"),5));
+        assertTrue(methods.isElementVisible(moreOptionsMenu,5));
 
         String moreButtonMenuItems = "//button[@class='wC9sIed7pfp47wZbmU6m']//span[text()=";
         By removeSongFromPlaylistMenuItem = By.xpath(moreButtonMenuItems + "'Remove from this playlist']");
         methods.clickElement(removeSongFromPlaylistMenuItem);
-        methods.waitBySeconds(1);
+        methods.waitByMilliSeconds(200);
 
         assertNotEquals(methods.countListSize(playlistSizeXPath), playlistSize);
-        logger.info("Playlist size : " + methods.countListSize(playlistSizeXPath));
-
+        logger.info("Şarkı listeden çıkarıldı.");
     }
 
     public void removePlaylist() {
@@ -129,6 +126,7 @@ public class PlaylistPage extends BasePage {
         methods.clickElement(deletionConfirmationButton);
 
         assertTrue(methods.isElementVisible(playlistDeletedPopUp, 3));
+        logger.info("Playlist silindi.");
         methods.waitBySeconds(5);
 
     }

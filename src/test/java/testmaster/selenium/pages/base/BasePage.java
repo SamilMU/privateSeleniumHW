@@ -76,8 +76,7 @@ public class BasePage {
     public long getSongPosition(){
         String songDurationStr = methods.getAttribute(By.xpath("//div[@data-testid='playback-duration']"),
                 "data-test-position");
-        Long songDuration = Long.parseLong(songDurationStr);
-        return songDuration;
+        return Long.parseLong(songDurationStr);
     }
 
 

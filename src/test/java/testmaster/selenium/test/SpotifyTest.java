@@ -22,9 +22,11 @@ public class SpotifyTest extends Driver {
 
     @Test
     public void seleniumTestAutomationHWTest(){
+
         init();
         
         guestPage.clickLoginButton();
+
         loginPage.validLogin("samil.unal@testinium.com","@webbcry37228");
         
         homePage.clickCreatePlaylistButton();
@@ -35,7 +37,7 @@ public class SpotifyTest extends Driver {
 
         searchPage.search("Daft Punk");
 
-        searchPage.addSongs2Playlist();
+        searchPage.addSongs2Playlist(3);
 
         // Song name is can be partial but it is case-sensitive.
         homePage.clickCustomPlaylist("Spotify Listem");
@@ -48,6 +50,7 @@ public class SpotifyTest extends Driver {
         playlistPage.removePlaylist();
 
     }
+
 
     public void init(){
         guestPage = new GuestPage();

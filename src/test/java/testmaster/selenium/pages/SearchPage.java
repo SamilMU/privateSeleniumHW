@@ -1,10 +1,7 @@
 package testmaster.selenium.pages;
 
 import org.openqa.selenium.By;
-import org.w3c.dom.ranges.Range;
 import testmaster.selenium.pages.base.BasePage;
-
-import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -18,7 +15,7 @@ public class SearchPage extends BasePage {
     private static By selectedListItem;
 
     public void searchPageLoadedCheck() {
-        
+
         String urlWithoutKeyword = methods.driver.getCurrentUrl().substring(0,31);
         tabNameAndUrlCheck(tabName, methods.driver.getTitle(), pageUrl, urlWithoutKeyword);
 
@@ -32,7 +29,7 @@ public class SearchPage extends BasePage {
 
     }
 
-    public void addSongs2Playlist() {
+    public void addSongs2Playlist(int songCount) {
 
         assertTrue(methods.isElementClickable(chipOfSongs, 10));
 
@@ -40,7 +37,7 @@ public class SearchPage extends BasePage {
 
         assertTrue(methods.isElementVisible(By.xpath("//div[contains(@aria-label,'All songs for')]"), 20));
 
-        for (int i = 2; i < 5; i++) {  // Song list index starts at 2.
+        for (int i = 2; i < (songCount+2); i++) {  // Song list index starts at 2.
 
             String selectedSongStr = "//div[@class='JUa6JJNj7R_Y3i4P8YUX' and @role='presentation']//div[@aria-rowindex=" + i + "]";
 

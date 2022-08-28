@@ -1,8 +1,6 @@
 package testmaster.selenium.pages;
 
-import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
-import testmaster.selenium.methods.Methods;
 import testmaster.selenium.pages.base.BasePage;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -23,10 +21,12 @@ public class HomePage extends BasePage {
 
     public void clickCustomPlaylist(String playlistName){
 
+        homePageLoadedCheck();
         By customPlaylistButton = By.xpath("//a[contains(@href,'playlist')]//span[text()='" + playlistName + "']");
         assertTrue(methods.isElementClickable(customPlaylistButton,10));
         methods.clickElementJs(customPlaylistButton);
 
     }
+
 
 }
