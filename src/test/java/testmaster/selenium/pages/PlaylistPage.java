@@ -11,7 +11,6 @@ import static org.junit.jupiter.api.Assertions.*;
 public class PlaylistPage extends BasePage {
 
     private static final String pageUrl = "https://open.spotify.com/playlist/";
-    private static final String tabName = "Spotify - My Playlist";
     private static final By moreButton = By.xpath("//div[@data-testid='action-bar-row']//button[@data-testid='more-button']");
     private static final By playListNameBox = By.xpath("//button[@class='wCkmVGEQh3je1hrbsFBY']");
     private static final By playlistEditTextBox = By.xpath("//input[@data-testid='playlist-edit-details-name-input']");
@@ -26,12 +25,11 @@ public class PlaylistPage extends BasePage {
     public void playlistPageLoadedCheck() {
 
         logger.info("==============  Playlist Page Loaded Check  ================");
-
-
+    
+        
         String urlWithoutRedirection = methods.driver.getCurrentUrl().substring(0, 34);
-        String defaultTabName = methods.driver.getTitle().substring(0, 20);
 
-        tabNameAndUrlCheck(tabName, defaultTabName, pageUrl, urlWithoutRedirection);
+        tabNameAndUrlCheck(methods.driver.getTitle(), methods.driver.getTitle(), pageUrl, urlWithoutRedirection);
         sideBarCheck();
 
         assertTrue(methods.isElementVisible(moreButton, 20));
@@ -56,7 +54,7 @@ public class PlaylistPage extends BasePage {
     }
 
     public void playSong(String songName, long duration) {
-
+        
         playlistPageLoadedCheck();
 
         logger.info("==============  Play Song  ================");

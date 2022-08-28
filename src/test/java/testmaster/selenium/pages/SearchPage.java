@@ -31,7 +31,7 @@ public class SearchPage extends BasePage {
     }
 
     public void addSongs2Playlist(int songCount) {
-        logger.info("==============  Add Songs to Playlist  ================");
+        logger.debug("==============  Add Songs to Playlist  ================");
 
         assertTrue(methods.isElementClickable(chipOfSongs, 10));
 
@@ -58,7 +58,7 @@ public class SearchPage extends BasePage {
             assertTrue(methods.isElementClickable(myPlaylistMenuItem, 10));
 
             methods.clickElement(myPlaylistMenuItem);
-            methods.waitBySeconds(2);
+            methods.waitByMilliSeconds(750);
         }
     }
 }
