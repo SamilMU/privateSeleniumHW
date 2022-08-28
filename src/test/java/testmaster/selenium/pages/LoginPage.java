@@ -14,13 +14,9 @@ public class LoginPage extends BasePage {
     private static String pageUrl = "https://accounts.spotify.com/en/login";
     private static String tabName = "Login - Spotify";
 
-    public LoginPage(){
-        loginPageLoadedCheck();
-    }
-
     public void loginPageLoadedCheck(){
 
-        String urlWithoutRedirection = methods.driver.getCurrentUrl().substring(0,36);
+        String urlWithoutRedirection = methods.driver.getCurrentUrl().substring(0,37);
         tabNameAndUrlCheck(tabName, methods.driver.getTitle(), pageUrl, urlWithoutRedirection);
 
         assertTrue(methods.isElementVisible(By.id("login-username"),20));
@@ -35,15 +31,16 @@ public class LoginPage extends BasePage {
     }
 
     public void validLogin(String username, String password){
-
+        
+        loginPageLoadedCheck();
+        
         methods.sendKeys(By.id("login-username"), username);
         methods.sendKeys(By.id("login-password"), password);
 
         assertTrue(methods.isElementClickable(By.id("login-button"),10));
-        assertEquals(methods.getText(By.id("login-username")),username);
 
         methods.clickElement(By.id("login-button"));
-
+        
     }
 
 }

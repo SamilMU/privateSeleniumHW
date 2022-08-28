@@ -10,7 +10,7 @@ public class GuestPage extends BasePage {
 
     /** Constants */
     private static String pageUrl = "https://open.spotify.com/";
-    private static String tabName = "Spotify - Web Player";
+    private static String tabName = "Spotify – Web Player";
 
     public GuestPage(){
         guestPageLoadedCheck();
@@ -31,10 +31,9 @@ public class GuestPage extends BasePage {
     public void clickLoginButton(){
     
         By loginButton = By.xpath("//button[@data-testid='login-button']");
-
         assertTrue(methods.isElementClickable(loginButton,10));
-
         methods.clickElement(loginButton);
+        methods.waitBySeconds(5);
 
     }
 

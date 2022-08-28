@@ -11,13 +11,7 @@ public class HomePage extends BasePage {
 
     /** Constants */
     private static String pageUrl = "https://open.spotify.com/";
-    private static String tabName = "Spotify - Web Player";
-
-    public HomePage(){
-
-        homePageLoadedCheck();
-
-    }
+    private static String tabName = "Spotify – Web Player";
 
     public void homePageLoadedCheck(){
 
@@ -30,11 +24,9 @@ public class HomePage extends BasePage {
 
     //TODO can take a playlist name but there are hidden elemets atop.
     public void clickCustomPlaylist(){
-
+        
         By customPlaylistButton = By.xpath("//div[@class='AINMAUImkAYJd4ertQxy']");
-
         assertTrue(methods.isElementClickable(customPlaylistButton,10));
-
         methods.clickElement(customPlaylistButton);
 
     }
