@@ -17,22 +17,10 @@ public class SearchPage extends BasePage {
     private static By chipOfSongs = By.xpath("//span[@class='ChipInner-sc-1ly6j4j-0 dLSEQM' and text()='Songs']");
     private static By selectedListItem;
 
-    public SearchPage() {
-        searchPageLoadedCheck("");
-    }
-
-    public void searchPageLoadedCheck(String searchStr) {
-
-        String searchPageUrl = methods.driver.getCurrentUrl();
-        if (searchStr != "") {
-            searchPageUrl = searchPageUrl + "/" + searchStr;
-        }
-
-        tabNameAndUrlCheck(tabName, methods.driver.getTitle(), pageUrl, searchPageUrl);
-
-        assertTrue(methods.isElementVisible(By.xpath("//h2[contains(text(),'Browse')]"), 20));
-        assertTrue(methods.isElementVisible(By.xpath("//h3[contains(text(),'Podcasts')]"), 20));
-
+    public void searchPageLoadedCheck() {
+        
+        String urlWithoutKeyword = methods.driver.getCurrentUrl().substring(0,31);
+        tabNameAndUrlCheck(tabName, methods.driver.getTitle(), pageUrl, urlWithoutKeyword);
 
     }
 
@@ -40,7 +28,7 @@ public class SearchPage extends BasePage {
 
         assertTrue(methods.isElementVisible(searchTextBox, 10));
         methods.sendKeys(searchTextBox, searchStr);
-        searchPageLoadedCheck(searchStr);
+        searchPageLoadedCheck();
 
     }
 

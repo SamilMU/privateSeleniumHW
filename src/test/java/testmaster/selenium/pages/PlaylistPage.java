@@ -92,15 +92,15 @@ public class PlaylistPage extends BasePage {
     
         // TODO use global playlist name const
         String playlistSizeXPath = "//div[@aria-label='" + playlistName + "']//div[@role='row']";
-        int playlistSize = methods.countChildObjects(playlistSizeXPath);
+        int playlistSize = methods.countListSize(playlistSizeXPath);
         logger.info("Playlist current size is " + playlistSize);
 
         String selectedMenuItemStr = "//div[@class='JUa6JJNj7R_Y3i4P8YUX']//div[@aria-rowindex='" + (index+1) + "']";
         selectedMenuItem = By.xpath(selectedMenuItemStr);
         methods.hoverElement(selectedMenuItem);
-
-        By selectedSongMoreButton = By.xpath(selectedMenuItem + "//button[@data-testid='more-button']");
-        assertTrue(methods.isElementClickable(selectedSongMoreButton, 10));
+        
+        By selectedSongMoreButton = By.xpath(selectedMenuItemStr + "//button[@data-testid='more-button']");
+        methods.hoverElement(selectedSongMoreButton);
         methods.clickElement(selectedSongMoreButton);
 
         assertTrue(methods.isElementVisible(By.xpath("//div[@id='context-menu']"),5));
@@ -110,8 +110,8 @@ public class PlaylistPage extends BasePage {
         methods.clickElement(removeSongFromPlaylistMenuItem);
         methods.waitBySeconds(1);
 
-        assertNotEquals(methods.countChildObjects(playlistSizeXPath), playlistSize);
-        logger.info("Playlist size : " + methods.countChildObjects(playlistSizeXPath));
+        assertNotEquals(methods.countListSize(playlistSizeXPath), playlistSize);
+        logger.info("Playlist size : " + methods.countListSize(playlistSizeXPath));
 
     }
 

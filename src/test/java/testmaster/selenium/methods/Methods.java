@@ -6,7 +6,6 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.Select;
 import testmaster.selenium.driver.Driver;
 
 import java.time.Duration;
@@ -66,7 +65,7 @@ public class Methods {
         logger.info(by.toString() + " elemente js ile tıklandı");
     }
 
-    public int countChildObjects(String xPathOfParent){
+    public int countListSize(String xPathOfParent){
         return driver.findElements(By.xpath(xPathOfParent)).size()-1;
     }
 

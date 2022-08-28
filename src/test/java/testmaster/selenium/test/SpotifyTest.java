@@ -23,6 +23,7 @@ public class SpotifyTest extends Driver {
     @Test
     public void seleniumTestAutomationHWTest(){
         init();
+        
         guestPage.clickLoginButton();
         loginPage.validLogin("samil.unal@testinium.com","@webbcry37228");
         
