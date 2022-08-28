@@ -24,7 +24,7 @@ public class Methods {
     }
 
     public FluentWait<WebDriver> setFluentWait(long timeout){
-         return new FluentWait<WebDriver>(driver)
+         return new FluentWait<>(driver)
                 .withTimeout(Duration.ofSeconds(timeout))
                 .pollingEvery(Duration.ofMillis(250))
                 .ignoring(NoSuchElementException.class);
@@ -37,12 +37,12 @@ public class Methods {
     public void clickElement(By by){
         findElementWait(by).click();
         waitBySeconds(1);
-        logger.info(by.toString() + " elementine tıklandı");
+        logger.info("Clicked on " + by.toString());
     }
 
     public void sendKeys(By by, String text){
         findElementWait(by).sendKeys(text);
-        logger.info(by.toString() + " elementine " + text + " texti yazıldı");
+        logger.info("Text input -> Input element : " + by.toString() + " text :  " + text);
     }
 
     public String getText(By by){
@@ -57,13 +57,13 @@ public class Methods {
         WebElement webElement = findElementWait(by);
         Actions actions = new Actions(driver);
         actions.moveToElement(webElement).build().perform();
-        logger.info(by.toString() + " elementine hover işlemi yapıldı");
+        logger.info("Hovered : " + by.toString());
     }
 
     public void clickElementJs(By by){
         WebElement webElement = findElementWait(by);
         jsDriver.executeScript("arguments[0].click();", webElement);
-        logger.info(by.toString() + " elemente js ile tıklandı");
+        logger.info("Clicked on " + by.toString() + " with js");
     }
 
     public int countListSize(String xPathOfParent){
@@ -103,7 +103,7 @@ public class Methods {
 
     public void waitBySeconds(long seconds){
         waitByMilliSeconds(1000*seconds);
-        logger.info(seconds + " saniye beklendi");
+        logger.info("Waited " + seconds + " seconds");
     }
     public void waitByMilliSeconds(long milliSeconds){
         try {
@@ -112,7 +112,7 @@ public class Methods {
             throw new RuntimeException(e);
         }
         if (milliSeconds % 1000 != 0)
-            logger.info(milliSeconds + " milisaniye beklendi");
+            logger.info("Waited " + milliSeconds + " milliseconds");
     }
     
 }

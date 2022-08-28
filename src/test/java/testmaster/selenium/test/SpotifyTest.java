@@ -3,17 +3,12 @@ package testmaster.selenium.test;
 import org.junit.jupiter.api.Test;
 import testmaster.selenium.driver.Driver;
 import testmaster.selenium.pages.*;
-import testmaster.selenium.pages.base.BasePage;
 
 public class SpotifyTest extends Driver {
 
-    // TODO Cleaner method names and less gibberish class-more clean names(use more steps if necessary.)
-    // TODO More loggers. Differ the project further from the source.
-    // TODO Additionally separate Test classes
-    // TODO Git Page.
-    // TODO POM check
-    // TODO Check BDD and Gauge, maybe apply if time allows.
-
+    private static final String playlistName = "Spotify Listem";
+    private static final String userEMail = "samil.unal@testinium.com";
+    private static final String password = "@webbcry37228";
     GuestPage guestPage;
     LoginPage loginPage;
     HomePage homePage;
@@ -27,13 +22,13 @@ public class SpotifyTest extends Driver {
         
         guestPage.clickLoginButton();
 
-        loginPage.validLogin("samil.unal@testinium.com","@webbcry37228");
+        loginPage.validLogin(userEMail,password);
         
         homePage.homePageLoadedCheck();
         
         homePage.clickCreatePlaylistButton();
 
-        playlistPage.changePlaylistName("Spotify Listem");
+        playlistPage.changePlaylistName(playlistName);
 
         playlistPage.clickSearchButton();
 
@@ -42,7 +37,7 @@ public class SpotifyTest extends Driver {
         searchPage.addSongs2Playlist(3);
 
         // Song name is can be partial but it is case-sensitive.
-        homePage.clickCustomPlaylist("Spotify Listem");
+        homePage.clickCustomPlaylist(playlistName);
 
         // Song name is can be partial but it is case-sensitive.
         playlistPage.playSong("Instant Crush",10);
