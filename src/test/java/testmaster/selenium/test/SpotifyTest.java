@@ -36,7 +36,8 @@ public class SpotifyTest extends Driver {
 
         searchPage.addSongs2Playlist();
 
-        homePage.clickCustomPlaylist();
+        // Song name is can be partial but it is case-sensitive.
+        homePage.clickCustomPlaylist("Spotify Listem");
 
         // Song name is can be partial but it is case-sensitive.
         playlistPage.playSong("Instant Crush",10);
