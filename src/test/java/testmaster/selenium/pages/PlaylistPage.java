@@ -3,110 +3,140 @@ package testmaster.selenium.pages;
 import org.openqa.selenium.By;
 import testmaster.selenium.pages.base.BasePage;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PlaylistPage extends BasePage {
 
 
-    public void playlistPageAssertions(){
+    /**
+     * Constants
+     */
+    private static String pageUrl = "https://open.spotify.com/playlist/";
+    private static String tabName = "Spotify - My Playlist";
 
-        //TODO add assertions
+    public PlaylistPage() {
+        playlistPageLoadedCheck();
+    }
+
+    public void playlistPageLoadedCheck() {
+
+        String urlWithoutRedirection = methods.driver.getCurrentUrl().substring(0, 33);
+        String defaultTabName = methods.driver.getTitle().substring(0, 20);
+
+        tabNameAndUrlCheck(tabName, defaultTabName, pageUrl, urlWithoutRedirection);
+        sideBarCheck();
+
+        assertTrue(methods.isElementVisible
+                (By.xpath("//div[@data-testid='action-bar-row']//button[@data-testid='more-button']"),
+                        20));
 
     }
 
-    public void changePlaylistName(){
+    public void changePlaylistName(String newPlaylistName) {
+
 
         By playlistNameButton = By.xpath("//button[@class='wCkmVGEQh3je1hrbsFBY']");
-
-        assertTrue(methods.isElementClickable(playlistNameButton,10));
-
+        assertTrue(methods.isElementClickable(playlistNameButton, 10));
         methods.clickElement(playlistNameButton);
+
 
         By playlistNewNameTextBox = By.xpath("//input[@data-testid='playlist-edit-details-name-input']");
 
-        assertTrue(methods.isElementVisible(playlistNewNameTextBox,10));
-        // TODO collect constants to somewhere. This playlist name str can be used in search page.
-        methods.sendKeys(playlistNewNameTextBox, "Spotify Listem");
-        // TODO maybe add description as well
-        By playlistEditSaveButton = By.xpath("//button[@data-testid='playlist-edit-details-save-button']");
+        assertTrue(methods.isElementVisible(playlistNewNameTextBox, 10));
+        assertTrue(methods.isElementVisible(By.xpath
+                        ("//div[@class='CU0wnmWejIvyEsRRtSac']//button[@data-testid='edit-image-button']"),
+                20));
+        methods.sendKeys(playlistNewNameTextBox, newPlaylistName);
 
-        assertTrue(methods.isElementClickable(playlistEditSaveButton,10));
 
-        methods.clickElement(playlistEditSaveButton);
+        By playlistSaveButton = By.xpath("//button[@data-testid='playlist-edit-details-save-button']");
+        assertTrue(methods.isElementClickable(playlistSaveButton, 10));
+        methods.clickElement(playlistSaveButton);
 
     }
 
-    public void play2ndSongFor10Sec(){
+    // TODO
 
-        String secondSongMenuItemStr = "//div[@class='JUa6JJNj7R_Y3i4P8YUX']//div[@aria-rowindex='3']";
-        
-        By secondSongMenuItem = By.xpath(secondSongMenuItemStr);
+    /**
+     * data-testid:"playback-position" or value of data-testid:"playback-duration"
+     */
+    public void playSong(String songName, long duration) {
 
-        methods.scrollElementIfNeeded(secondSongMenuItem);
+        String wantedMenuItem = "//div[contains(text(),'"+ songName +"')]";
+        By menuItemBy = By.xpath(wantedMenuItem);
+        methods.scrollElementIfNeeded(menuItemBy);
 
-        methods.waitBySeconds(2);
-        
-        //TODO make hover work and there can be a lot of assertions here
-        
-        methods.clickElement(By.xpath(secondSongMenuItemStr+"//span[@class='Type__TypeElement-goli3j-0 eDbSCl']"));
+        //TODO test hover
+        //methods.hoverElement(menuItemBy);
 
-        By playButton = By.xpath(secondSongMenuItemStr+"//button[@class='RfidWIoz8FON2WhFoItU']");
+        By playButton = By.xpath(wantedMenuItem + "//button[@class='RfidWIoz8FON2WhFoItU']");
+        assertTrue(methods.isElementClickable(playButton, 10));
 
-        assertTrue(methods.isElementClickable(playButton,10));
+        methods.clickElement(By.xpath(wantedMenuItem + "//span[@class='Type__TypeElement-goli3j-0 eDbSCl']"));
+
+        assertTrue(methods.isElementClickable(playButton, 10));
 
         methods.clickElement(playButton);
 
-        methods.waitBySeconds(10);
+
+        Long songPos = getSongPosition();
+        while(songPos<duration*1000){
+            methods.waitByMilliSeconds(500);
+            songPos = getSongPosition();
+        }
 
         methods.clickElement(By.xpath("//button[@data-testid='control-button-playpause']"));
-        
+        methods.waitByMilliSeconds(500);
+        assertEquals(getSongPosition(),songPos);
+
     }
-    
-    public void remove3rdSongFromPlaylist(){
-        
-        String thirdSongMenuItemStr = "//div[@class='JUa6JJNj7R_Y3i4P8YUX']//div[@aria-rowindex='4']";
-    
-        By thirdSongMenuItem = By.xpath(thirdSongMenuItemStr);
-    
-        methods.hoverElement(thirdSongMenuItem);
-    
-        By selectedSongMoreButton = By.xpath(thirdSongMenuItemStr+"//button[@data-testid='more-button']");
-    
-        assertTrue(methods.isElementClickable(selectedSongMoreButton,10));
-    
+
+
+
+    // TODO get index as parameter.
+    public void removeSongFromPlaylist(int index) {
+
+        // TODO use global playlist name const
+        String playlistSizeXPath = "//div[@aria-label='Spotify Listem']//div[@role='row']";
+        int playlistSize = methods.countChildObjects(playlistSizeXPath);
+        String wantedMenuItem = "//div[@class='JUa6JJNj7R_Y3i4P8YUX']//div[@aria-rowindex='" + index+1 + "']";
+        By wantedMenuItemBy = By.xpath(wantedMenuItem);
+        methods.hoverElement(wantedMenuItemBy);
+
+        By selectedSongMoreButton = By.xpath(wantedMenuItem + "//button[@data-testid='more-button']");
+        assertTrue(methods.isElementClickable(selectedSongMoreButton, 10));
         methods.clickElement(selectedSongMoreButton);
-    
+
+        assertTrue(methods.isElementVisible(By.xpath("//div[@id='context-menu']"),5));
+
         String moreButtonMenuItems = "//button[@class='wC9sIed7pfp47wZbmU6m']//span[text()=";
-    
         By removeSongFromPlaylistMenuItem = By.xpath(moreButtonMenuItems + "'Remove from this playlist']");
-    
         methods.clickElement(removeSongFromPlaylistMenuItem);
-    
-        methods.waitBySeconds(2);
-        
+        // TODO use 'playlist remove check' to check if song is removed.
+        methods.waitBySeconds(1);
+        assertNotEquals(methods.countChildObjects(playlistSizeXPath), playlistSize);
+
     }
-    
-    public void removePlaylist(){
-    
+
+    public void removePlaylist() {
+
         By selectedSongMoreButton = By.xpath("//div[@class='eSg4ntPU2KQLfpLGXAww']//button[@data-testid='more-button']");
-    
         methods.scrollElementIfNeeded(selectedSongMoreButton);
-        
-        assertTrue(methods.isElementClickable(selectedSongMoreButton,10));
-        
+        assertTrue(methods.isElementClickable(selectedSongMoreButton, 10));
+
         methods.clickElement(selectedSongMoreButton);
-        
+        // TODO make sure menu is opened.
         methods.clickElement(By.xpath("//button[@class='wC9sIed7pfp47wZbmU6m']//span[text()='Delete']"));
-        
+        // TODO check if PopUp is existent.
         By deletionConfirmationButton = By.xpath("//button[@class='Button-qlcn5g-0 hgTVhT']//span[text()='DELETE']");
-    
-        assertTrue(methods.isElementClickable(deletionConfirmationButton,10));
-        
+
+        assertTrue(methods.isElementClickable(deletionConfirmationButton, 10));
+
         methods.clickElement(deletionConfirmationButton);
-        
-        assertTrue(methods.isElementVisible(By.cssSelector("div[class=AOaoydTb5lrGytHbTAAy]"),3));
-    
+
+        assertTrue(methods.isElementVisible(By.cssSelector("div[class=AOaoydTb5lrGytHbTAAy]"), 3));
+
         methods.waitBySeconds(5);
-    
+
     }
 }

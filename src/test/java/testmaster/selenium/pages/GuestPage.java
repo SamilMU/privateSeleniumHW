@@ -8,30 +8,27 @@ import testmaster.selenium.pages.base.BasePage;
 
 public class GuestPage extends BasePage {
 
+    /** Constants */
+    private static String pageUrl = "https://open.spotify.com/";
+    private static String tabName = "Spotify - Web Player";
 
     public GuestPage(){
-
+        guestPageLoadedCheck();
+        closeTermsFooterIfOpen();
     }
 
-    public void guestPageAssertions(){
+    public void guestPageLoadedCheck(){
 
-        //TODO different assertions
+        tabNameAndUrlCheck(tabName, methods.driver.getTitle(), pageUrl, methods.driver.getCurrentUrl());
+        sideBarCheck();
 
-        assertTrue(methods.isElementVisible(By.xpath("//a[@aria-current=\"page\" and ./span[text()=\"Ana sayfa\"]]"),20));
-        assertTrue(methods.isElementVisible(By.cssSelector("a[href=\"/search\"]"),20));
-        assertTrue(methods.isElementVisible(By.cssSelector("a[href=\"/collection\"]"),20));
-        assertTrue(methods.isElementVisible(By.xpath("//button[text()=\"Kaydol\"]"),30));
-        assertTrue(methods.isElementVisible(By.cssSelector("button[data-testid=\"login-button\"]"),20));
+        assertTrue(methods.isElementVisible(By.xpath("//div[@class='LKFFk88SIRC9QKKUWR5u']//button[text()='Sign up']"),20));
+        assertTrue(methods.isElementVisible(By.cssSelector("button[data-testid='login-button']"),20));
+        assertTrue(methods.isElementVisible(By.xpath("//section[@data-testid='component-shelf' and @aria-label='Spotify Playlists']"),20));
 
     }
 
     public void clickLoginButton(){
-    
-        By termsAndCookiesButton = By.xpath("//button[@class='onetrust-close-btn-handler onetrust-close-btn-ui banner-close-button ot-close-icon']");
-    
-        assertTrue(methods.isElementClickable(termsAndCookiesButton,10));
-    
-        methods.clickElement(termsAndCookiesButton);
     
         By loginButton = By.xpath("//button[@data-testid='login-button']");
 
@@ -41,6 +38,21 @@ public class GuestPage extends BasePage {
 
     }
 
+    public void closeTermsFooterIfOpen(){
+
+        By termsDiv = By.cssSelector("div[id='onetrust-banner-sdk']");
+
+        if(methods.isElementVisible(termsDiv,3)){
+
+            By termsAndCookiesButton = By.xpath("//button[@class='onetrust-close-btn-handler onetrust-close-btn-ui banner-close-button ot-close-icon']");
+
+            assertTrue(methods.isElementClickable(termsAndCookiesButton,10));
+
+            methods.clickElement(termsAndCookiesButton);
+
+        }
+
+    }
 
     /**
      a[href="/search"]

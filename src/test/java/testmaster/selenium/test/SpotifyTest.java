@@ -6,26 +6,18 @@ import testmaster.selenium.pages.*;
 
 public class SpotifyTest extends Driver {
 
+    // TODO Cleaner method names and less gibberish class-more clean names(use more steps if necessary.)
+    // TODO More loggers. Differ the project further from the source.
+    // TODO Additionally separate Test classes
+    // TODO Git Page.
+    // TODO POM check
+    // TODO Check BDD and Gauge, maybe apply if time allows.
+
     GuestPage guestPage;
     LoginPage loginPage;
     HomePage homePage;
     PlaylistPage playlistPage;
     SearchPage searchPage;
-    
-    public void loginTest(){
-
-        /**
-        https://github.com/YunusBalaman/TestmasterSeleniumProject
-         */
-        System.out.println("Spotify");
-        init();
-//        guestPage.controlGuestPage();
-        guestPage.clickLoginButton();
-//        loginPage.controlLoginPage();
-        loginPage.validLogin("yunussahabt@gmail.com","Testinium2022");
-        homePage.loginControl("YunusB");
-
-    }
 
     @Test
     public void seleniumTestAutomationHWTest(){
@@ -36,7 +28,7 @@ public class SpotifyTest extends Driver {
         
         homePage.clickCreatePlaylistButton();
 
-        playlistPage.changePlaylistName();
+        playlistPage.changePlaylistName("Spotify Listem");
 
         playlistPage.clickSearchButton();
 
@@ -46,9 +38,10 @@ public class SpotifyTest extends Driver {
 
         homePage.clickCustomPlaylist();
 
-        playlistPage.play2ndSongFor10Sec();
+        // Song name is can be partial but it is case-sensitive.
+        playlistPage.playSong("Instant Crush",10);
         
-        playlistPage.remove3rdSongFromPlaylist();
+        playlistPage.removeSongFromPlaylist(3);
         
         playlistPage.removePlaylist();
 

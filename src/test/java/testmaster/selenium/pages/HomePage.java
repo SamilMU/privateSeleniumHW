@@ -9,24 +9,26 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class HomePage extends BasePage {
 
+    /** Constants */
+    private static String pageUrl = "https://open.spotify.com/";
+    private static String tabName = "Spotify - Web Player";
 
     public HomePage(){
 
+        homePageLoadedCheck();
+
     }
 
-    public void loginControl(String username){
+    public void homePageLoadedCheck(){
 
-        String usernameElement = "figure[data-testid=\"user-widget-avatar\"]" +
-                "[title=\""+ username+"\"]";
+        tabNameAndUrlCheck(tabName, methods.driver.getTitle(), pageUrl, methods.driver.getCurrentUrl());
+        sideBarCheck();
+        loggedInCheck("Samil"); // Might take as a parameter.
 
-        Assertions.assertTrue(methods.isElementVisible(By.cssSelector(usernameElement),20));
-        String usernameTitle = methods.getAttribute(By.cssSelector("figure[data-testid=\"user-widget-avatar\"]"),"title");
-        Assertions.assertEquals(username, usernameTitle);
-        String actualUserName = methods.getText(By.cssSelector("figure[data-testid=\"user-widget-avatar\"][title=\"YunusB\"]" +
-                " ~ span[data-testid=\"user-widget-name\"]"));
-        Assertions.assertEquals(username, actualUserName);
     }
 
+
+    //TODO can take a playlist name but there are hidden elemets atop.
     public void clickCustomPlaylist(){
 
         By customPlaylistButton = By.xpath("//div[@class='AINMAUImkAYJd4ertQxy']");
@@ -35,16 +37,6 @@ public class HomePage extends BasePage {
 
         methods.clickElement(customPlaylistButton);
 
-    }
-    
-    public void deleteCustomPlaylist(){
-    
-        By customPlaylistButton = By.xpath("//div[@class='AINMAUImkAYJd4ertQxy']");
-    
-        assertTrue(methods.isElementClickable(customPlaylistButton,10));
-    
-        methods.clickElement(customPlaylistButton);
-        
     }
 
 }

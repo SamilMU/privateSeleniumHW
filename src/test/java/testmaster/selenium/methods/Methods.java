@@ -15,7 +15,7 @@ import java.time.Duration;
 public class Methods {
 
     private static final Logger logger = LogManager.getLogger(Methods.class);
-    WebDriver driver;
+    public WebDriver driver;
     FluentWait<WebDriver> fluentWait;
     JavascriptExecutor jsDriver;
     public Methods(){
@@ -102,13 +102,8 @@ public class Methods {
         logger.info(by.toString() + " elemente js ile tıklandı");
     }
 
-    public void scrollElementCenter(By by){
-
-        WebElement webElement = findElementWait(by);
-        jsDriver.executeScript(
-                "arguments[0].scrollIntoView({behavior: 'smooth', block: 'center', inline: 'center'});",
-                webElement);
-        logger.info(by.toString() + " scrollElementCenter");
+    public int countChildObjects(String xPathOfParent){
+        return driver.findElements(By.xpath(xPathOfParent)).size()-1;
     }
 
     public void scrollElement(By by){
