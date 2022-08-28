@@ -3,6 +3,7 @@ package testmaster.selenium.test;
 import org.junit.jupiter.api.Test;
 import testmaster.selenium.driver.Driver;
 import testmaster.selenium.pages.*;
+import testmaster.selenium.pages.base.BasePage;
 
 public class SpotifyTest extends Driver {
 
@@ -24,7 +25,6 @@ public class SpotifyTest extends Driver {
         init();
         guestPage.clickLoginButton();
         loginPage.validLogin("samil.unal@testinium.com","@webbcry37228");
-        //homePage.loginControl("Samil");
         
         homePage.clickCreatePlaylistButton();
 

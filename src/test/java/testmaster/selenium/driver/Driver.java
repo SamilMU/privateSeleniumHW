@@ -18,7 +18,6 @@ public class Driver {
 
     @BeforeAll
     public static void beforeAll(){
-
         logger.info("****** Before All ******");
     }
 
@@ -27,24 +26,7 @@ public class Driver {
 
         logger.info("========= Before =========");
         System.setProperty("webdriver.chrome.driver","src/test/resources/chromedriver.exe");
-
-        /**
-        // Windows
-        System.setProperty("webdriver.chrome.driver","src/test/resources/chromedriver.exe");
-         */
-
         ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--disable-notifications");
-        //chromeOptions.addArguments("--disable-gpu");
-        //chromeOptions.addArguments("--no-sandbox");
-        chromeOptions.addArguments("disable-infobars");
-        chromeOptions.addArguments("disable-plugins");
-        //chromeOptions.addArguments("disable-popup-blocking");
-        chromeOptions.addArguments("ignore-certificate-errors");
-        chromeOptions.addArguments("disable-translate");
-        //chromeOptions.addArguments("disable-extensions");
-        DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
-        chromeOptions.merge(desiredCapabilities);
         driver = new ChromeDriver(chromeOptions);
         driver.manage().window().maximize();
         driver.get("https://open.spotify.com/");
@@ -56,13 +38,11 @@ public class Driver {
         if (driver != null){
             driver.quit();
         }
-
         logger.info("========= After =========");
     }
 
     @AfterAll
     public static void afterAll(){
-
         logger.info("****** After All ******");
     }
 

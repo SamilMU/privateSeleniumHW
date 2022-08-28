@@ -27,8 +27,8 @@ public class GuestPage extends BasePage {
         sideBarCheck();
 
         assertTrue(methods.isElementVisible(signUpButton,10));
-        assertTrue(methods.isElementVisible(loginButton,20));
-        assertTrue(methods.isElementVisible(componentShelf,20));
+        assertTrue(methods.isElementVisible(loginButton,10));
+        assertTrue(methods.isElementVisible(componentShelf,10));
 
     }
 
@@ -36,14 +36,13 @@ public class GuestPage extends BasePage {
 
         assertTrue(methods.isElementClickable(loginButton,10));
         methods.clickElement(loginButton);
-        methods.waitBySeconds(5);
+        methods.waitBySeconds(1);
 
     }
 
     public void closeTermsFooterIfOpen(){
 
         if(methods.isElementVisible(closeTermsPopUpButton,3)){
-
             By termsAndCookiesButton = By.xpath("//button[@class='onetrust-close-btn-handler onetrust-close-btn-ui banner-close-button ot-close-icon']");
             assertTrue(methods.isElementClickable(termsAndCookiesButton,10));
             methods.clickElement(termsAndCookiesButton);

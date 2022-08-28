@@ -37,7 +37,7 @@ public class SearchPage extends BasePage {
 
     public void addSongs2Playlist() {
         // TODO reach using "Songs", not pos.
-        By songsChip = By.xpath("//a[@class='ZWI7JsjzJaR_G8Hy4W6J' and position()=2]");
+        By songsChip = By.xpath("//span[@class='ChipInner-sc-1ly6j4j-0 dLSEQM' and text()='Songs']");
 
         assertTrue(methods.isElementClickable(songsChip, 10));
 
